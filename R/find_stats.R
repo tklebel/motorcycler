@@ -60,7 +60,7 @@ find_erstzulassung <- function(inserat) {
 find_ids <- function(inserat) {
 
   # find all links within each inserat
-  links <- normalinserat %>%
+  links <- inserat %>%
     html_nodes("a") %>%
     html_attr("href")
 
