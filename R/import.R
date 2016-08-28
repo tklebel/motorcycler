@@ -1,12 +1,14 @@
-get_page_numbers <- function(link) {
-  page <- xml2::read_html(link)
-
-  page %>%
+#' @export
+#' @noRd
+get_page_numbers <- function(html_page) {
+  html_page %>%
     rvest::html_node(".jumplistalt") %>%
     rvest::html_text() %>%
     stringr::str_count("\\d")
 }
 
+#' @export
+#' @noRd
 extract_inserat <- function(link, css = ".normalinserat") {
   page <- xml2::read_html(link)
 
@@ -14,6 +16,8 @@ extract_inserat <- function(link, css = ".normalinserat") {
     rvest::html_nodes(css = css)
 }
 
+#' @export
+#' @noRd
 extract_css <- function(inserat, css) {
   inserat %>%
     html_node(css) %>%
@@ -21,11 +25,3 @@ extract_css <- function(inserat, css) {
 }
 
 
-prepare_preis <- function(inserat, css = ".preis") {
-  inserat %>%
-    extract_css(css = css) %>%
-    str_extract_all("[\\d]") %>%
-    at_depth(1, ~paste0(., collapse = "")) %>%
-    at_depth(1, as.numeric) %>%
-    unlist()
-}
