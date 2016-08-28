@@ -1,11 +1,16 @@
 #' @export
 #' @noRd
 get_page_numbers <- function(link) {
-  link %>%
+  list <- link %>%
     xml2::read_html() %>%
-    rvest::html_node(".jumplistalt") %>%
-    rvest::html_text() %>%
-    stringr::str_count("\\d")
+    rvest::html_node(".jumplistalt")
+  if (inherits(list, "xml_missing")) {
+    return(1)
+  } else {
+    list %>%
+      rvest::html_text() %>%
+      stringr::str_count("\\d")
+  }
 }
 
 #' @export
@@ -28,7 +33,7 @@ scrape_page <- function(link) {
   number_of_pages <- get_page_numbers(link)
 
   # create links
-  links <- paste0(hornet_link, "/seite/", seq_len(number_of_pages))
+  links <- paste0(link, "/seite/", seq_len(number_of_pages))
   pages <- map(links, xml2::read_html)
 
   pages
@@ -71,7 +76,18 @@ extract_stats <- function(page) {
     premium_daten <- NULL
   }
 
-
   # bind data together
   dplyr::bind_rows(premium_daten, normal_daten)
+}
+
+#' @export
+combine_collection <- function(link, motorrad) {
+  pages <- scrape_page(link)
+
+  stats <- pages %>%
+    map(extract_stats) %>%
+    dplyr::bind_rows() %>%
+    dplyr::mutate(motorrad = motorrad)
+
+  stats
 }
