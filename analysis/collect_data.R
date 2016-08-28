@@ -9,18 +9,20 @@ links <- list("http://www.1000ps.at/gebrauchte-motorraeder/marke/Honda/modell/Ho
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Yamaha/modell/Yamaha-FZ-6N",
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Yamaha/modell/Yamaha-XJ6",
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Kawasaki/modell/Kawasaki-ZR-7",
-              "http://www.1000ps.at/gebrauchte-motorraeder/marke/Kawasaki/modell/Kawasaki-Z-750")
+              "http://www.1000ps.at/gebrauchte-motorraeder/marke/Kawasaki/modell/Kawasaki-Z-750",
+              "http://www.1000ps.at/gebrauchte-motorraeder/marke/Suzuki/modell/Suzuki-Bandit-650")
 
 
-motorräder <- list("Honda Hornet",
-                   "Suzuki Bandit",
+motorcycles <- list("Honda Hornet",
+                   "Suzuki Bandit 600",
                    "Yamaha FZ-6N",
                    "Yamaha XJ6",
                    "Kawasaki ZR-7",
-                   "Kawasaki Z750")
+                   "Kawasaki Z750",
+                   "Suzuki Bandit 650")
 
 
-daten <- pmap(list(links, motorräder), combine_collection)
+daten <- pmap(list(links, motorcycles), combine_collection)
 
 
 gesammelte_daten <- dplyr::bind_rows(daten) %>%
