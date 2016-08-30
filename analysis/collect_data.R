@@ -5,6 +5,7 @@ library(dplyr)
 library(motorcycler)
 
 links <- list("http://www.1000ps.at/gebrauchte-motorraeder/marke/Honda/modell/Honda-CB-600-F-Hornet",
+              "http://www.1000ps.at/gebrauchte-motorraeder/marke/Honda/modell/Honda-CB-900-F-Hornet",
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Suzuki/modell/Suzuki-Bandit-600",
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Yamaha/modell/Yamaha-FZ-6N",
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Yamaha/modell/Yamaha-XJ6",
@@ -13,7 +14,8 @@ links <- list("http://www.1000ps.at/gebrauchte-motorraeder/marke/Honda/modell/Ho
               "http://www.1000ps.at/gebrauchte-motorraeder/marke/Suzuki/modell/Suzuki-Bandit-650")
 
 
-motorcycles <- list("Honda Hornet",
+motorcycles <- list("Honda Hornet 600",
+                    "Honda Hornet 900",
                    "Suzuki Bandit 600",
                    "Yamaha FZ-6N",
                    "Yamaha XJ6",
