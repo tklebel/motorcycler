@@ -23,7 +23,20 @@ motorcycles <- list("Honda Hornet 600",
                    "Kawasaki Z750",
                    "Suzuki Bandit 650")
 
+# check for internet connection ----
+time <- 0
+connection <- FALSE
 
+while (!connection) {
+  connection <- curl::has_internet()
+  if (connection) break
+  Sys.sleep(1)
+  time <- time + 1
+}
+print(paste0("Seconds it took to establish connectivity: ", time))
+
+
+# download data ----
 daten <- pmap(list(links, motorcycles), combine_collection)
 
 
