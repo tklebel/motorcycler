@@ -62,11 +62,11 @@ extract_stats <- function(page) {
   # check, if there is something to collect
   if (length(premiuminserat) > 0) {
     id <- find_ids(premiuminserat)
-    seller <- find_seller(premiuminserat, premium = T)
-    bundesland <- find_bundesland(premiuminserat, premium = T)
-    preis <- find_price(premiuminserat, css = ".premiumprice")
-    km <- find_km(premiuminserat, premium = T)
-    ez <- find_erstzulassung(premiuminserat, premium = T)
+    seller <- find_seller(premiuminserat)
+    bundesland <- find_bundesland(premiuminserat)
+    preis <- find_price(premiuminserat)
+    km <- find_km(premiuminserat)
+    ez <- find_erstzulassung(premiuminserat)
     premium <- TRUE
 
     premium_daten <- dplyr::data_frame(id, seller,

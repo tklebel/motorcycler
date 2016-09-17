@@ -1,8 +1,8 @@
 #' @export
 #' @noRd
-find_price <- function(inserat, css = ".preis") {
+find_price <- function(inserat) {
   inserat %>%
-    extract_css(css = css) %>%
+    extract_css(css = ".dataright span") %>%
     str_extract_all("[\\d]") %>%
     at_depth(1, ~paste0(., collapse = "")) %>%
     at_depth(1, as.numeric) %>%
@@ -11,86 +11,45 @@ find_price <- function(inserat, css = ".preis") {
 
 #' @export
 #' @noRd
-find_seller <- function(inserat, premium = F) {
-  if (premium) {
-    inserat %>%
-      rvest::html_node(".premiumdealer") %>%
-      rvest::html_text() %>%
-      stringr::str_extract_all(".*(?= aus)") %>%
-      map(~.[1]) %>%
-      unlist()
-  } else {
-    inserat %>%
-      rvest::html_node(".main-region") %>%
-      rvest::html_text() %>%
-      stringr::str_extract_all(".*(?=,)") %>%
-      purrr::map(~.[1]) %>%
-      unlist %>%
-      stringr::str_replace_all("\\s", "")
-  }
+find_seller <- function(inserat) {
+  inserat %>%
+    rvest::html_node(".anbieter") %>%
+    rvest::html_text() %>%
+    stringr::str_replace_all("\\s", "")
+
 }
 
 #' @export
 #' @noRd
-find_bundesland <- function(inserat, premium = F) {
-  if (premium) {
-    inserat %>%
-      rvest::html_node(".premiumdealer") %>%
-      rvest::html_text() %>%
-      stringr::str_extract_all("(?<=aus).*") %>%
-      stringr::str_replace_all("\\s", "")
-  } else {
-    inserat %>%
-      rvest::html_node(".main-region") %>%
-      rvest::html_text() %>%
-      stringr::str_extract_all("(?<=,).*") %>%
-      stringr::str_replace_all("\\s", "")
-  }
+find_bundesland <- function(inserat) {
+  inserat %>%
+    rvest::html_node(".region") %>%
+    rvest::html_text() %>%
+    stringr::str_replace_all(",", "")
 }
 
 #' @export
 #' @noRd
-find_km <- function(inserat, premium = F) {
-  if (premium) {
-    inserat %>%
-      extract_css(css = ".premium-tech-data") %>%
-      str_extract_all(".*(km)") %>%
-      unlist() %>%
-      str_replace_all("km", "") %>%
-      str_replace_all("\\.", "") %>%
-      as.numeric()
-  } else {
-    inserat %>%
-      extract_css(".techdata") %>%
-      str_extract_all("(km).*") %>%
-      unlist() %>%
-      str_replace_all("km: ", "") %>%
-      str_replace_all("\\.", "") %>%
-      as.numeric()
-  }
+find_km <- function(inserat) {
+  inserat %>%
+    extract_css(".dataleft p") %>%
+    str_extract_all(".*(km)") %>%
+    str_extract_all("[\\d]") %>%
+    at_depth(1, ~paste0(., collapse = "")) %>%
+    at_depth(1, as.numeric) %>%
+    unlist()
 }
 
 #' @export
 #' @noRd
-find_erstzulassung <- function(inserat, premium = F) {
-  if (premium) {
-    inserat %>%
-      extract_css(".premium-tech-data") %>%
-      str_extract_all("(EZ).*") %>%
-      unlist() %>%
-      str_replace_all("EZ: ", "") %>%
-      str_replace_all("\\.", "") %>%
-      as.numeric()
-  } else {
-    inserat %>%
-      extract_css(".techdata") %>%
-      str_extract_all("(EZ).*") %>%
-      unlist() %>%
-      str_replace_all("EZ: ", "") %>%
-      str_replace_all("\\.", "") %>%
-      as.numeric()
-  }
-
+find_erstzulassung <- function(inserat) {
+  inserat %>%
+    extract_css(".dataleft p") %>%
+    str_extract_all("(BJ).*,") %>%
+    str_extract_all("[\\d]") %>%
+    at_depth(1, ~paste0(., collapse = "")) %>%
+    at_depth(1, as.numeric) %>%
+    unlist()
 }
 
 #' @export

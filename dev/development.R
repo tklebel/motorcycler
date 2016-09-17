@@ -16,6 +16,13 @@ pages <- get_page_numbers(hornet_link)
 # create links
 hornet_links <- paste0(hornet_link, "/seite/", 1:pages)
 
+
+# need to repair extraction of stats
+hornet_pages <- scrape_page(hornet_link)
+
+map(hornet_pages, extract_stats)
+
+
 # ID
 find_ids(normalinserat)
 
@@ -30,7 +37,7 @@ normalinserat %>%
 
 # preis
 normalinserat %>%
-  find_price(".preis")
+  find_price()
 
 # weitere daten
 normalinserat %>%
@@ -79,3 +86,6 @@ hornet_pages[[2]] %>%
 # - Einstellungsdatum
 # - Anzahl der Klicks
 # - Adresse
+
+# TODO ----
+# Tests, mit automatischer Mail, falls eine unerwartet hohe Zahl an NAs auftritt
