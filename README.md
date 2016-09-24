@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/tklebel/motorcycler.svg?branch=master)](https://travis-ci.org/tklebel/motorcycler)
+
 # motorcycler
 
 The goal of motorcycler is to download and analyze data about second-hand
