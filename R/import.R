@@ -34,7 +34,7 @@ scrape_page <- function(link) {
 
   # create links
   links <- paste0(link, "/seite/", seq_len(number_of_pages))
-  pages <- map(links, xml2::read_html)
+  pages <- purrr::map(links, xml2::read_html)
 
   pages
 }
@@ -85,7 +85,7 @@ combine_collection <- function(link, motorrad) {
   pages <- scrape_page(link)
 
   stats <- pages %>%
-    map(extract_stats) %>%
+    purrr::map(extract_stats) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(motorrad = motorrad)
 
