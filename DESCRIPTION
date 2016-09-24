@@ -13,5 +13,10 @@ Imports:
     rvest,
     xml2,
     purrr,
-    stringr
+    stringr,
+    magrittr,
+    readr,
+    curl
 RoxygenNote: 5.0.1
+Suggests: testthat,
+    dplyr
