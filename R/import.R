@@ -74,6 +74,13 @@ extract_stats <- function(page) {
   dplyr::bind_rows(premium_daten, normal_daten)
 }
 
+#' Download page collect statistics
+#'
+#' @param link URL of the desired page
+#'
+#' @param motorrad Character vector of length 1, containing the name of the
+#' motorcycle
+#'
 #' @export
 combine_collection <- function(link, motorrad) {
   pages <- scrape_page(link)
