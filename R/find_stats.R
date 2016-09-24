@@ -1,4 +1,3 @@
-#' @export
 #' @noRd
 find_price <- function(inserat) {
   inserat %>%
@@ -9,26 +8,23 @@ find_price <- function(inserat) {
     unlist()
 }
 
-#' @export
 #' @noRd
 find_seller <- function(inserat) {
   inserat %>%
-    rvest::html_node(".anbieter") %>%
-    rvest::html_text() %>%
-    stringr::str_replace_all("\\s", "")
+    html_node(".anbieter") %>%
+    html_text() %>%
+    str_replace_all("\\s", "")
 
 }
 
-#' @export
 #' @noRd
 find_bundesland <- function(inserat) {
   inserat %>%
-    rvest::html_node(".region") %>%
-    rvest::html_text() %>%
-    stringr::str_replace_all(",", "")
+    html_node(".region") %>%
+    html_text() %>%
+    str_replace_all(",", "")
 }
 
-#' @export
 #' @noRd
 find_km <- function(inserat) {
   inserat %>%
@@ -40,7 +36,6 @@ find_km <- function(inserat) {
     unlist()
 }
 
-#' @export
 #' @noRd
 find_erstzulassung <- function(inserat) {
   inserat %>%
@@ -52,7 +47,6 @@ find_erstzulassung <- function(inserat) {
     unlist()
 }
 
-#' @export
 #' @noRd
 find_ids <- function(inserat) {
 
@@ -67,7 +61,7 @@ find_ids <- function(inserat) {
     str_replace_all("/gebrauchtes-motorrad-", "")
 
   # create index to filter out unnecessary Snippet
-  index <- str_detect(id, "Snippet")
+  index <- stringr::str_detect(id, "Snippet")
 
   # apply index and reduce to unique ids
   id[!index] %>%

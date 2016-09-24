@@ -1,5 +1,3 @@
-#' @export
-#' @noRd
 get_page_numbers <- function(link) {
   list <- link %>%
     xml2::read_html() %>%
@@ -13,15 +11,11 @@ get_page_numbers <- function(link) {
   }
 }
 
-#' @export
-#' @noRd
 extract_inserat <- function(page, css = ".normalinserat") {
   page %>%
     rvest::html_nodes(css = css)
 }
 
-#' @export
-#' @noRd
 extract_css <- function(inserat, css) {
   inserat %>%
     html_node(css) %>%
