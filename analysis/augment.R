@@ -5,8 +5,8 @@ combined_data <- readr::read_rds("../data-combined/combined_data.rds")
 # find motorcycles with changed price
 augmented <- combined_data %>%
   group_by(id) %>%
-  mutate(preis_min = min(preis),
-         preis_max = max(preis),
+  mutate(preis_min = min(preis, na.rm = T),
+         preis_max = max(preis, na.rm = T),
          preis_changed = !identical(preis_min, preis_max)) %>%
   ungroup()
 
