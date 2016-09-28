@@ -51,8 +51,11 @@ augmented <- readr::read_rds("data-combined/augmented.rds")
 
 augmented %>%
   filter(preis_changed) %>%
-  ggplot(aes(fetched, preis, group = id, colour = id)) +
-  geom_line()
+  ggplot(aes(fetched, preis)) +
+  geom_line(aes(group = id, colour = ez)) +
+  stat_summary(fun.y = "median", geom = "line", colour = "red3") +
+  facet_wrap(~motorrad)
+
 
 # Entwicklung der Preise über die Zeit
 p <- ggplot(augmented, aes(fetched, preis, group = motorrad, colour = motorrad)) +
