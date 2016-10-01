@@ -47,5 +47,5 @@ test_that("bundesland is scraped", {
 
   expect_false(identical(length(missing), length(collected_data$bundesland)))
   expect_type(collected_data$bundesland, "character")
-  expect_match(collected_data$bundesland, bundesländer)
+  expect_match(collected_data$bundesland, bundesländer, all = F)
 })
