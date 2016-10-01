@@ -1,7 +1,7 @@
 get_page_numbers <- function(link) {
   list <- link %>%
     xml2::read_html() %>%
-    rvest::html_node(".jumplistalt")
+    rvest::html_node(".paginglinksbox")
   if (inherits(list, "xml_missing")) {
     return(1)
   } else {
