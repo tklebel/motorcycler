@@ -74,3 +74,14 @@ augmented %>%
   geom_jitter() +
   facet_wrap(~motorrad) +
   geom_smooth()
+
+
+# how is number of motorcycles available at market changing?
+augmented %>%
+  group_by(fetched) %>%
+  count(motorrad) %>%
+  ggplot(aes(fetched, n, colour = motorrad)) +
+  geom_line()
+
+# There is something wrong with how many pages are scraped!!!
+# Now it is fixed...
