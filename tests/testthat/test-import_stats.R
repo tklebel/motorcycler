@@ -49,3 +49,12 @@ test_that("bundesland is scraped", {
   expect_type(collected_data$bundesland, "character")
   expect_match(collected_data$bundesland, bundesländer, all = F)
 })
+
+test_that("number of pages is correct", {
+  kawa_link <- "http://www.1000ps.at/gebrauchte-motorraeder/marke/Kawasaki/modell/Kawasaki-ZR-7"
+
+  expect_gt(get_page_numbers(hornet_link), 2)
+  expect_equal(get_page_numbers(kawa_link), 1)
+})
+
+
