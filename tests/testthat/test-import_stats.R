@@ -53,7 +53,7 @@ test_that("bundesland is scraped", {
 test_that("number of pages is correct", {
   kawa_link <- "http://www.1000ps.at/gebrauchte-motorraeder/marke/Kawasaki/modell/Kawasaki-ZR-7"
 
-  expect_gt(get_page_numbers(hornet_link), 2)
+  expect_gt(get_page_numbers(hornet_link), 1)
   expect_equal(get_page_numbers(kawa_link), 1)
 })
 
